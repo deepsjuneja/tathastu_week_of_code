@@ -26,4 +26,4 @@ for x in li1:
         c+=1
 
 if c == 0:
-    print("NONE ")
+    print("NONE")
