@@ -10,7 +10,6 @@ from pygame import mixer
 
 def speak(audioString):
     global x
-    x = 0
     b = audioString
     if len(b) == 0:
         return
@@ -65,7 +64,7 @@ def jarvis(data):
 
 
 time.sleep(0.5)
-x=0
+x = 0
 print("start..")
 speak("Hi Deepika! What can I do for you?")
 data = recordAudio()
