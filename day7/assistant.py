@@ -79,9 +79,9 @@ def jarvis(data):
             hum = weather["humidity"] 
             desc = js["weather"][0]["description"]
             resp_string = " The temperature in Kelvin is " + str(temp) + " The humidity is " + str(hum) + " and The weather description is "+ str(desc)
-            respond(resp_string)
+            speak(resp_string)
         else: 
-            respond("City Not Found")
+            speak("City Not Found")
 
     else :
         speak("I did not get what you said !!!!!")
