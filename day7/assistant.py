@@ -7,6 +7,8 @@ import os
 from gtts import gTTS
 import pygame
 from pygame import mixer
+import requests
+import json
 
 def speak(audioString):
     global x
@@ -57,8 +59,30 @@ def jarvis(data):
     elif "where is" in data:
         data = data.split(" ")
         location = data[2]
-        speak("Hold on Deepika while I will show you where " + location + " is.")
+        speak("Hold on Deepika while I show you where " + location + " is.")
         wb.open_new_tab("https://www.google.nl/maps/place/" + location + "/&amp;")
+
+    elif "weather details of" in data:
+        weather_url = "http://api.openweathermap.org/data/2.5/weather?"
+        api_key = "607fe2eac6ced3399d24c848c76dccb2"
+        
+        data = data.split(" ")
+        city = data[3]
+        url = weather_url + "q=" + city + "&appid=" + api_key
+        js = requests.get(url).json()
+
+        speak("Hold on Deepika while I show you the weather details of " + city + ".")
+
+        if js["cod"] != "404": 
+            weather = js["main"] 
+            temp = weather["temp"] 
+            hum = weather["humidity"] 
+            desc = js["weather"][0]["description"]
+            resp_string = " The temperature in Kelvin is " + str(temp) + " The humidity is " + str(hum) + " and The weather description is "+ str(desc)
+            respond(resp_string)
+        else: 
+            respond("City Not Found")
+
     else :
         speak("I did not get what you said !!!!!")
 
